@@ -47,7 +47,6 @@ logger = logging.get_logger(__name__)
 
 class ModelType(ExplicitEnum):
     LayoutLMv3 = "layoutlmv3"
-    LayoutLMv2 = "layoutlmv2"
 
 
 class DocumentTokenClassificationArgumentHandler(ArgumentHandler):
@@ -92,8 +91,6 @@ class DocumentTokenClassificationPipeline(Pipeline):
         self._args_parser = args_parser
         if self.model.config.model_type == "layoutlmv3":
             self.model_type = ModelType.LayoutLMv3
-        elif self.model.config.model_type == "layoutlmv2":
-            self.model_type = ModelType.LayoutLMv2
         else:
             raise ValueError(f"Model type {self.model.config.model_type} is not supported by this pipeline.")
 
@@ -198,8 +195,8 @@ class DocumentTokenClassificationPipeline(Pipeline):
 
         if self.model_type == ModelType.LayoutLMv3:
             image_field = "pixel_values"
-        elif self.model_type == ModelType.LayoutLMv2:
-            image_field = "image"
+        else:
+            raise ValueError(f"Model type {self.model.config.model_type} is not supported by this pipeline.")
         encoded_inputs[image_field] = features.pop("pixel_values")
 
         # Fields that help with post-processing
