@@ -57,9 +57,9 @@ class DocumentTokenClassificationArgumentHandler(ArgumentHandler):
     def __call__(self, inputs: Union[str, List[str]], **kwargs):
 
         if inputs is not None and isinstance(inputs, (list, tuple)) and len(inputs) > 0:
-            inputs = list(inputs)
+            return list(inputs)
         elif isinstance(inputs, str) or isinstance(inputs, Image.Image) or isinstance(inputs, dict):
-            inputs = [inputs]
+            return [inputs]
         elif Dataset is not None and isinstance(inputs, Dataset) or isinstance(inputs, types.GeneratorType):
             return inputs
         else:
