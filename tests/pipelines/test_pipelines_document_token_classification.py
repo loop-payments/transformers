@@ -138,7 +138,7 @@ class DocumentTokenClassificationPipelineTests(unittest.TestCase, metaclass=Pipe
         self.assertEqual(outputs["word_labels"], [])
 
 
-#    @slow
+    @slow
     @require_torch
     @require_pytesseract
     @require_vision
