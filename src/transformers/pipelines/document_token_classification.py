@@ -173,8 +173,7 @@ class DocumentTokenClassificationPipeline(Pipeline):
             boxes = [x[1] for x in input["word_boxes"]]
         elif image is not None and not TESSERACT_LOADED:
             raise ValueError(
-                "If you provide an image without word_boxes, then the pipeline will run OCR using Tesseract,"
-                " but pytesseract is not available"
+                "`word_boxes` not supplied and pytesseract not available to run OCR"
             )
         else:
             self.image_processor.apply_ocr = True
